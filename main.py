@@ -11,7 +11,7 @@ if __name__ == '__main__':
     import sys
     app = QtGui.QApplication(sys.argv)
 
-    serialThread = CpSerial("blah")
+    serialThread = CpSerial()
     serialThread.start()
     
     console = ConsoleCtl(serialThread)

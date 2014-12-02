@@ -11,7 +11,7 @@ class CpSerial(QtCore.QThread):
     
     received = pyqtSignal(QString)
 
-    def __init__(self, portName):
+    def __init__(self):
         QtCore.QThread.__init__(self)
         self.sig_stop = False
         
