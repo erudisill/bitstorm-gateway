@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pyuic4 ./Console/consoleView.ui > ./Console/consoleView.py
