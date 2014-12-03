@@ -81,7 +81,19 @@
      </layout>
     </item>
     <item>
-     <widget class="QTextEdit" name="textLog"/>
+     <widget class="QTextEdit" name="textLog">
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Tue Dec  2 14:56:08 2014
+# Created: Wed Dec  3 11:48:22 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -58,6 +58,13 @@ class Ui_ConsoleView(object):
         self.horizontalLayout_4.addWidget(self.groupBox_2)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
         self.textLog = QtGui.QTextEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Courier New"))
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.textLog.setFont(font)
+        self.textLog.setReadOnly(True)
         self.textLog.setObjectName(_fromUtf8("textLog"))
         self.verticalLayout.addWidget(self.textLog)
         ConsoleView.setCentralWidget(self.centralwidget)

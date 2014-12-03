@@ -6,6 +6,7 @@ Created on Dec 2, 2014
 from PyQt4 import QtCore
 from PyQt4.Qt import pyqtSignal, QString
 from serial.tools import list_ports
+import logging
 
 class CpSerial(QtCore.QThread):
     
@@ -14,13 +15,13 @@ class CpSerial(QtCore.QThread):
     def __init__(self):
         QtCore.QThread.__init__(self)
         self.sig_stop = False
-        
-    def run(self):
-        print 'CpSerial starting...'
+                
+    def run(self):        
+        logging.info('CpSerial starting...')
         while self.sig_stop == False:
             self.sleep(1)
             self.received.emit('hello')
-        print 'CpSerial stopping...'
+        logging.info('CpSerial stopping...')
         
     def quit(self):
         super(CpSerial, self).quit()
@@ -30,4 +31,4 @@ class CpSerial(QtCore.QThread):
         return list(list_ports.comports())
     
     def openPort(self, portName):
-        self.received.emit('Opening port: %s' % portName)
+        logging.info('Opening port: %s' % portName)
