@@ -12,11 +12,6 @@ from Console.consoleLogger import ConsoleLogger
 if __name__ == '__main__':
     import sys
 
-    # Init logging system early
-    logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(None)
-    logging.info('Log started')
-   
     # Main serial service
     serialService = CpSerial()
 
@@ -25,6 +20,8 @@ if __name__ == '__main__':
     console = ConsoleCtl(serialService)
 
     # Now create the ConsoleLogger bridge and connect
+    logger = logging.getLogger('console')
+    logger.setLevel(logging.DEBUG)
     x = ConsoleLogger()
     logger.addHandler(x)
     x.log.connect(console.logRecord)

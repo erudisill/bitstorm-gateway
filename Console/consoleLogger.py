@@ -9,7 +9,7 @@ Used as a bridge between the Python logging service and a Qt widget/window/objec
 
 import logging
 from PyQt4 import QtCore
-from PyQt4.Qt import pyqtSignal, QString
+from PyQt4.Qt import pyqtSignal
 
 class ConsoleLoggerFormatter(logging.Formatter):
     
@@ -22,14 +22,15 @@ class ConsoleLoggerFormatter(logging.Formatter):
         logging.Formatter.__init__(self)
     
     def format(self, record):
+        self.datefmt = self.standardDateFmt    
+
         if record.levelno == ConsoleLogger.SERIAL_SEND:
-            self._fmt = self.serialSendFmt
+            self._fmt = self.serialSendFmt    
         elif record.levelno == ConsoleLogger.SERIAL_RECEIVE:
             self._fmt = self.serialReceiveFmt
         else:
             self._fmt = self.standardFmt
             
-        self.datefmt = self.standardDateFmt    
         return super(ConsoleLoggerFormatter, self).format(record)
             
 
