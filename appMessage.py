@@ -22,25 +22,9 @@
 '''
 
 import struct 
+from cobs import cobs
 
 class AppMessage:
-    def __init__(self, raw):
-        fmt = '<BBQHQHBHBbBIIB'
-        x = struct.unpack_from(fmt, raw)
-        self.messageType = x[0]
-        self.nodeType = x[1]
-        self.extAddr = x[2]
-        self.shortAddr = x[3]
-        self.routerAddr = x[4]
-        self.panId = x[5]
-        self.workingChannel = x[6]
-        self.parentShortAddr = x[7]
-        self.lqi = x[8]
-        self.rssi = x[9]
-        self.ackByte = x[10]
-        self.battery = x[11]
-        self.temperature = x[12]
-        self.cs = x[13]
 
     def __repr__(self):
         return  'messageType: {0:#04x}, '    \
@@ -63,5 +47,30 @@ class AppMessage:
     
    
 
-        #test = bytearray([ 0x01,0x02,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0xa,0xf0,0x0e,0x0b,0x0c,0x0d,0x04,0x03,0x02,0x01,0x04,0x03,0x02,0x01,0xff ])
-        #msg = AppMessage(test) 
+    def decode(self, data):
+        fmt = '<BBQHQHBHBbBIIB'
+        x = struct.unpack_from(fmt, data)
+        self.messageType = x[0]
+        self.nodeType = x[1]
+        self.extAddr = x[2]
+        self.shortAddr = x[3]
+        self.routerAddr = x[4]
+        self.panId = x[5]
+        self.workingChannel = x[6]
+        self.parentShortAddr = x[7]
+        self.lqi = x[8]
+        self.rssi = x[9]
+        self.ackByte = x[10]
+        self.battery = x[11]
+        self.temperature = x[12]
+        self.cs = x[13]        
+        
+    def decode_cobs(self, cobs_input):
+        data = cobs.decode(buffer(cobs_input))
+        self.decode(data)
+        
+    def test(self):
+        test = bytearray([ 0x01,0x02,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0xa,0xf0,0x0e,0x0b,0x0c,0x0d,0x04,0x03,0x02,0x01,0x04,0x03,0x02,0x01,0xff ])
+        cobs_data = cobs.encode(buffer(test))
+        self.decode_cobs(bytearray(cobs_data))
+        print self
