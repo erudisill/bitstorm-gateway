@@ -3,17 +3,17 @@ Created on Dec 2, 2014
 
 @author: ericrudisill
 '''
+import logging
 from PyQt4  import QtGui
 from Console.consoleCtl import ConsoleCtl
-from cpSerial import CpSerial
-import logging
+from cpSerial import CpSerialService
 from Console.consoleLogger import ConsoleLogger
         
 if __name__ == '__main__':
     import sys
 
     # Main serial service
-    serialService = CpSerial()
+    serialService = CpSerialService()
 
     # Init Qt and the main window
     app = QtGui.QApplication(sys.argv)
@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     # Now create the ConsoleLogger bridge and connect
     logger = logging.getLogger('console')
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     x = ConsoleLogger()
     logger.addHandler(x)
     x.log.connect(console.logRecord)
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     app.exec_()
     
     # All done, shut the serial service down
-    serialService.quit()
+    serialService.stop_service()
     serialService.wait(5000)
     
     # Good bye

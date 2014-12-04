@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Thu Dec  4 10:04:14 2014
+# Created: Thu Dec  4 15:25:48 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,20 +43,30 @@ class Ui_ConsoleView(object):
         self.buttonOpenPort = QtGui.QPushButton(self.groupBox)
         self.buttonOpenPort.setObjectName(_fromUtf8("buttonOpenPort"))
         self.horizontalLayout_2.addWidget(self.buttonOpenPort)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
         self.horizontalLayout_4.addWidget(self.groupBox)
         self.groupBox_2 = QtGui.QGroupBox(self.centralwidget)
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox_2)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.pushButton = QtGui.QPushButton(self.groupBox_2)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.horizontalLayout.addWidget(self.pushButton)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        self.buttonGetMAC = QtGui.QPushButton(self.groupBox_2)
+        self.buttonGetMAC.setObjectName(_fromUtf8("buttonGetMAC"))
+        self.horizontalLayout.addWidget(self.buttonGetMAC)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
         self.horizontalLayout_4.addWidget(self.groupBox_2)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.horizontalLayout_5 = QtGui.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
+        self.lineData = QtGui.QLineEdit(self.centralwidget)
+        self.lineData.setObjectName(_fromUtf8("lineData"))
+        self.horizontalLayout_5.addWidget(self.lineData)
+        self.buttonSend = QtGui.QPushButton(self.centralwidget)
+        self.buttonSend.setObjectName(_fromUtf8("buttonSend"))
+        self.horizontalLayout_5.addWidget(self.buttonSend)
+        self.checkHex = QtGui.QCheckBox(self.centralwidget)
+        self.checkHex.setObjectName(_fromUtf8("checkHex"))
+        self.horizontalLayout_5.addWidget(self.checkHex)
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.textLog = QtGui.QTextEdit(self.centralwidget)
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Courier New"))
@@ -66,6 +76,7 @@ class Ui_ConsoleView(object):
         self.textLog.setFont(font)
         self.textLog.setLineWrapMode(QtGui.QTextEdit.NoWrap)
         self.textLog.setReadOnly(True)
+        self.textLog.setTabStopWidth(60)
         self.textLog.setObjectName(_fromUtf8("textLog"))
         self.verticalLayout.addWidget(self.textLog)
         ConsoleView.setCentralWidget(self.centralwidget)
@@ -80,6 +91,8 @@ class Ui_ConsoleView(object):
         ConsoleView.setWindowTitle(_translate("ConsoleView", "MainWindow", None))
         self.groupBox.setTitle(_translate("ConsoleView", "Serial", None))
         self.buttonOpenPort.setText(_translate("ConsoleView", "Open Port", None))
-        self.groupBox_2.setTitle(_translate("ConsoleView", "GroupBox", None))
-        self.pushButton.setText(_translate("ConsoleView", "PushButton", None))
+        self.groupBox_2.setTitle(_translate("ConsoleView", "Commands", None))
+        self.buttonGetMAC.setText(_translate("ConsoleView", "Get MAC", None))
+        self.buttonSend.setText(_translate("ConsoleView", "Send", None))
+        self.checkHex.setText(_translate("ConsoleView", "is hex", None))
 
