@@ -13,9 +13,8 @@ if __name__ == '__main__':
     import sys
 
     # Init logging system early
-    logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(message)s')
+    logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(None)
-    logger.setLevel(logging.DEBUG)
     logging.info('Log started')
    
     # Main serial service
@@ -27,8 +26,6 @@ if __name__ == '__main__':
 
     # Now create the ConsoleLogger bridge and connect
     x = ConsoleLogger()
-    formatter = logging.Formatter('%(levelname)s:%(message)s')
-    x.setFormatter(formatter)
     logger.addHandler(x)
     x.log.connect(console.logRecord)
 

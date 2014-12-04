@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Wed Dec  3 11:48:22 2014
+# Created: Thu Dec  4 10:04:14 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -64,6 +64,7 @@ class Ui_ConsoleView(object):
         font.setBold(True)
         font.setWeight(75)
         self.textLog.setFont(font)
+        self.textLog.setLineWrapMode(QtGui.QTextEdit.NoWrap)
         self.textLog.setReadOnly(True)
         self.textLog.setObjectName(_fromUtf8("textLog"))
         self.verticalLayout.addWidget(self.textLog)

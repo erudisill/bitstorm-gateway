@@ -9,18 +9,44 @@ Used as a bridge between the Python logging service and a Qt widget/window/objec
 
 import logging
 from PyQt4 import QtCore
-from PyQt4.Qt import pyqtSignal
+from PyQt4.Qt import pyqtSignal, QString
+
+class ConsoleLoggerFormatter(logging.Formatter):
+    
+    standardDateFmt = '%H:%M:%S'
+    standardFmt = '%(asctime)s [%(levelname)s] %(message)s'
+    serialSendFmt = '%(asctime)s [SEND] %(message)s'
+    serialReceiveFmt = '%(asctime)s [RECV] %(message)s'
+    
+    def __init__(self):
+        logging.Formatter.__init__(self)
+    
+    def format(self, record):
+        if record.levelno == ConsoleLogger.SERIAL_SEND:
+            self._fmt = self.serialSendFmt
+        elif record.levelno == ConsoleLogger.SERIAL_RECEIVE:
+            self._fmt = self.serialReceiveFmt
+        else:
+            self._fmt = self.standardFmt
+            
+        self.datefmt = self.standardDateFmt    
+        return super(ConsoleLoggerFormatter, self).format(record)
+            
 
 class ConsoleLogger(logging.Handler, QtCore.QObject):
-
+    
+    SERIAL_SEND = 15
+    SERIAL_RECEIVE = 16
+    
     log = pyqtSignal(logging.LogRecord)
     
     def __init__(self):
         QtCore.QObject.__init__(self)
         logging.Handler.__init__(self)
-        fmt = logging.Formatter('%(levelname)s:%(message)s')
+        fmt = ConsoleLoggerFormatter()
         self.setFormatter(fmt)
         
     def emit(self, record):
+        record.message = self.format(record)
         self.log.emit(record)
         
