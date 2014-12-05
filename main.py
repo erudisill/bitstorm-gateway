@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     # Now create the ConsoleLogger bridge and connect
     logger = logging.getLogger('console')
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     x = ConsoleLogger()
     logger.addHandler(x)
     x.log.connect(console.logRecord)

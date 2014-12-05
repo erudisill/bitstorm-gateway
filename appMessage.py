@@ -22,9 +22,13 @@
 '''
 
 import struct 
-from cobs import cobs
 
 class AppMessage:
+
+    def __init__(self, raw=None):
+        self.raw = raw
+        if not raw is None:
+            self.decode(self.raw) 
 
     def __repr__(self):
         return  'messageType: {0:#04x}, '    \
@@ -65,12 +69,4 @@ class AppMessage:
         self.temperature = x[12]
         self.cs = x[13]        
         
-    def decode_cobs(self, cobs_input):
-        data = cobs.decode(buffer(cobs_input))
-        self.decode(data)
-        
-    def test(self):
-        test = bytearray([ 0x01,0x02,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0xa,0xf0,0x0e,0x0b,0x0c,0x0d,0x04,0x03,0x02,0x01,0x04,0x03,0x02,0x01,0xff ])
-        cobs_data = cobs.encode(buffer(test))
-        self.decode_cobs(bytearray(cobs_data))
-        print self
+

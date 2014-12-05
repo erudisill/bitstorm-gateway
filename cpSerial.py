@@ -140,7 +140,7 @@ class CpSerialService(QtCore.QThread):
             if len(data) > 0:
                 # log and signal data received
                 self.logger.log(ConsoleLogger.SERIAL_RECEIVE, data)
-                self.received.emit(data)
+                self.received.emit(bytearray(data))
             
             self.msleep(5)
         

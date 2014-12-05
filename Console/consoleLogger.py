@@ -14,9 +14,9 @@ from PyQt4.Qt import pyqtSignal
 class ConsoleLoggerFormatter(logging.Formatter):
     
     standardDateFmt = '%H:%M:%S'
-    standardFmt = '%(asctime)s [%(levelname)s]\t%(message)s'
-    serialSendFmt = '%(asctime)s [SEND]\t%(message)s'
-    serialReceiveFmt = '%(asctime)s [RECV]\t%(message)s'
+    standardFmt = '%(asctime)s %(message)s'
+    serialSendFmt = '%(asctime)s [SND] %(message)s'
+    serialReceiveFmt = '%(asctime)s [RCV] %(message)s'
     
     def __init__(self):
         logging.Formatter.__init__(self)

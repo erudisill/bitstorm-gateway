@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Thu Dec  4 16:14:34 2014
+# Created: Fri Dec  5 16:54:25 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,6 +43,9 @@ class Ui_ConsoleView(object):
         self.buttonOpenPort = QtGui.QPushButton(self.groupBox)
         self.buttonOpenPort.setObjectName(_fromUtf8("buttonOpenPort"))
         self.horizontalLayout_2.addWidget(self.buttonOpenPort)
+        self.buttonClosePort = QtGui.QPushButton(self.groupBox)
+        self.buttonClosePort.setObjectName(_fromUtf8("buttonClosePort"))
+        self.horizontalLayout_2.addWidget(self.buttonClosePort)
         self.horizontalLayout_4.addWidget(self.groupBox)
         self.groupBox_2 = QtGui.QGroupBox(self.centralwidget)
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
@@ -61,6 +64,10 @@ class Ui_ConsoleView(object):
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
         self.lineData = QtGui.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Monaco"))
+        font.setPointSize(12)
+        self.lineData.setFont(font)
         self.lineData.setObjectName(_fromUtf8("lineData"))
         self.horizontalLayout_5.addWidget(self.lineData)
         self.buttonSend = QtGui.QPushButton(self.centralwidget)
@@ -72,10 +79,10 @@ class Ui_ConsoleView(object):
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.textLog = QtGui.QTextEdit(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily(_fromUtf8("Courier New"))
+        font.setFamily(_fromUtf8("Monaco"))
         font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setWeight(50)
         self.textLog.setFont(font)
         self.textLog.setLineWrapMode(QtGui.QTextEdit.NoWrap)
         self.textLog.setReadOnly(True)
@@ -93,10 +100,11 @@ class Ui_ConsoleView(object):
     def retranslateUi(self, ConsoleView):
         ConsoleView.setWindowTitle(_translate("ConsoleView", "MainWindow", None))
         self.groupBox.setTitle(_translate("ConsoleView", "Serial", None))
-        self.buttonOpenPort.setText(_translate("ConsoleView", "Open Port", None))
+        self.buttonOpenPort.setText(_translate("ConsoleView", "Open", None))
+        self.buttonClosePort.setText(_translate("ConsoleView", "Close", None))
         self.groupBox_2.setTitle(_translate("ConsoleView", "Commands", None))
         self.buttonGetMAC.setText(_translate("ConsoleView", "Get MAC", None))
         self.buttonTest.setText(_translate("ConsoleView", "Test", None))
         self.buttonSend.setText(_translate("ConsoleView", "Send", None))
-        self.checkHex.setText(_translate("ConsoleView", "is hex", None))
+        self.checkHex.setText(_translate("ConsoleView", "as hex", None))
 

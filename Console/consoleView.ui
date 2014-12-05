@@ -29,7 +29,14 @@
          <item>
           <widget class="QPushButton" name="buttonOpenPort">
            <property name="text">
-            <string>Open Port</string>
+            <string>Open</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonClosePort">
+           <property name="text">
+            <string>Close</string>
            </property>
           </widget>
          </item>
@@ -77,7 +84,14 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QLineEdit" name="lineData"/>
+       <widget class="QLineEdit" name="lineData">
+        <property name="font">
+         <font>
+          <family>Monaco</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="buttonSend">
@@ -89,7 +103,7 @@
       <item>
        <widget class="QCheckBox" name="checkHex">
         <property name="text">
-         <string>is hex</string>
+         <string>as hex</string>
         </property>
        </widget>
       </item>
@@ -99,10 +113,10 @@
      <widget class="QTextEdit" name="textLog">
       <property name="font">
        <font>
-        <family>Courier New</family>
+        <family>Monaco</family>
         <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="lineWrapMode">
