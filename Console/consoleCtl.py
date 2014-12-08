@@ -79,19 +79,20 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         self.buttonTest.clicked.connect(self.testCobs)
     
     def serialReceived(self, data):
-        # Collect bytes till we see a \0 .. All data should be COBS encoded
-        for b in data:
-            if b == 0:
-                try:
-                    decoded = bytearray(cobs.decode(buffer(self.serial_buffer)))
-                    self.logger.info('[COB] ' + str(CpSerialBytes(decoded)))
-                    self.parseRecord(decoded)
-                except Exception, e:
-                    self.logger.error(str(e))
-                    self.logger.error(str(CpSerialBytes(self.serial_buffer)))
-                del self.serial_buffer[:]
-            else:
-                self.serial_buffer.append(b)
+        if self.checkDecodeCobs.isChecked():
+            # Collect bytes till we see a \0, then decode the COBS frame
+            for b in data:
+                if b == 0:
+                    try:
+                        decoded = bytearray(cobs.decode(buffer(self.serial_buffer)))
+                        self.logger.info('[COB] ' + str(CpSerialBytes(decoded)))
+                        self.parseRecord(decoded)
+                    except Exception, e:
+                        self.logger.error(str(e))
+                        self.logger.error(str(CpSerialBytes(self.serial_buffer)))
+                    del self.serial_buffer[:]
+                else:
+                    self.serial_buffer.append(b)
 
     def getMac(self):
         cmd = bytearray([ 0x02, 0x04, 0xff ])

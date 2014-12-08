@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Fri Dec  5 16:54:25 2014
+# Created: Mon Dec  8 10:09:58 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -89,6 +89,12 @@ class Ui_ConsoleView(object):
         self.textLog.setTabStopWidth(60)
         self.textLog.setObjectName(_fromUtf8("textLog"))
         self.verticalLayout.addWidget(self.textLog)
+        self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
+        self.checkDecodeCobs = QtGui.QCheckBox(self.centralwidget)
+        self.checkDecodeCobs.setObjectName(_fromUtf8("checkDecodeCobs"))
+        self.horizontalLayout_3.addWidget(self.checkDecodeCobs)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
         ConsoleView.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(ConsoleView)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -107,4 +113,5 @@ class Ui_ConsoleView(object):
         self.buttonTest.setText(_translate("ConsoleView", "Test", None))
         self.buttonSend.setText(_translate("ConsoleView", "Send", None))
         self.checkHex.setText(_translate("ConsoleView", "as hex", None))
+        self.checkDecodeCobs.setText(_translate("ConsoleView", "Decode COBS", None))
 
