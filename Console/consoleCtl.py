@@ -33,6 +33,7 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         self.buttonOpenPort.clicked.connect(self.openPort)
         self.buttonClosePort.clicked.connect(self.closePort)
         self.buttonSend.clicked.connect(self.sendData)
+        self.buttonClear.clicked.connect(self.clearLog)
         
         # Setup unique application commands/buttons
         self.setupCommands()
@@ -43,6 +44,13 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         return QtGui.QMainWindow.show(self, *args, **kwargs)
     
     def logRecord(self, record):
+        if record.levelno == ConsoleLogger.SERIAL_SEND or \
+           record.levelno == ConsoleLogger.SERIAL_RECEIVE:
+            if self.checkPaused.isChecked():
+                return
+            elif self.checkHideBytes.isChecked():
+                return
+            
         color = 'gray'
         if record.levelno == ConsoleLogger.SERIAL_SEND:
             color = 'black'
@@ -69,6 +77,9 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         else:
             data = bytearray(str(self.lineData.text()))
         self.serial.send(data)
+        
+    def clearLog(self):
+        self.textLog.setText("")
       
 ####################################################################
 # Add custom logic for protocol commands (buttons) here.
@@ -79,6 +90,8 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         self.buttonTest.clicked.connect(self.testCobs)
     
     def serialReceived(self, data):
+        if self.checkPaused.isChecked():
+            return
         if self.checkDecodeCobs.isChecked():
             # Collect bytes till we see a \0, then decode the COBS frame
             for b in data:
@@ -86,10 +99,17 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
                     try:
                         decoded = bytearray(cobs.decode(buffer(self.serial_buffer)))
                         self.logger.info('[COB] ' + str(CpSerialBytes(decoded)))
-                        self.parseRecord(decoded)
+                        self.parseCobsRecord(decoded)
                     except Exception, e:
                         self.logger.error(str(e))
                         self.logger.error(str(CpSerialBytes(self.serial_buffer)))
+                    del self.serial_buffer[:]
+                else:
+                    self.serial_buffer.append(b)
+        elif self.checkBleAscii.isChecked():
+            for b in data:
+                if b==0x0A:
+                    self.parseBleAsciiRecord(self.serial_buffer)
                     del self.serial_buffer[:]
                 else:
                     self.serial_buffer.append(b)
@@ -109,10 +129,12 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         data.extend([0x00])
         self.serialReceived(data)
         
-    def parseRecord(self, data):
+    def parseCobsRecord(self, data):
         if data[0] == 0x01:
             msg = AppMessage(data)
             self.logger.info(str(msg))
         
+    def parseBleAsciiRecord(self, data):
+        self.logger.info(str(data))
         
         

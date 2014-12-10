@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Mon Dec  8 10:09:58 2014
+# Created: Wed Dec 10 12:51:23 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -91,9 +91,23 @@ class Ui_ConsoleView(object):
         self.verticalLayout.addWidget(self.textLog)
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
+        self.checkPaused = QtGui.QCheckBox(self.centralwidget)
+        self.checkPaused.setObjectName(_fromUtf8("checkPaused"))
+        self.horizontalLayout_3.addWidget(self.checkPaused)
+        self.checkBleAscii = QtGui.QCheckBox(self.centralwidget)
+        self.checkBleAscii.setObjectName(_fromUtf8("checkBleAscii"))
+        self.horizontalLayout_3.addWidget(self.checkBleAscii)
         self.checkDecodeCobs = QtGui.QCheckBox(self.centralwidget)
         self.checkDecodeCobs.setObjectName(_fromUtf8("checkDecodeCobs"))
         self.horizontalLayout_3.addWidget(self.checkDecodeCobs)
+        self.checkHideBytes = QtGui.QCheckBox(self.centralwidget)
+        self.checkHideBytes.setObjectName(_fromUtf8("checkHideBytes"))
+        self.horizontalLayout_3.addWidget(self.checkHideBytes)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem1)
+        self.buttonClear = QtGui.QPushButton(self.centralwidget)
+        self.buttonClear.setObjectName(_fromUtf8("buttonClear"))
+        self.horizontalLayout_3.addWidget(self.buttonClear)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         ConsoleView.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(ConsoleView)
@@ -113,5 +127,9 @@ class Ui_ConsoleView(object):
         self.buttonTest.setText(_translate("ConsoleView", "Test", None))
         self.buttonSend.setText(_translate("ConsoleView", "Send", None))
         self.checkHex.setText(_translate("ConsoleView", "as hex", None))
+        self.checkPaused.setText(_translate("ConsoleView", "Paused", None))
+        self.checkBleAscii.setText(_translate("ConsoleView", "BLE ASCII", None))
         self.checkDecodeCobs.setText(_translate("ConsoleView", "Decode COBS", None))
+        self.checkHideBytes.setText(_translate("ConsoleView", "Hide Bytes", None))
+        self.buttonClear.setText(_translate("ConsoleView", "Clear", None))
 

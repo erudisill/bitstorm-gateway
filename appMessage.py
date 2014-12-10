@@ -40,10 +40,10 @@ class AppMessage:
                 'workingChannel: {6:#04x}, '           \
                 'parentShortAddr: {7:#06x}, '           \
                 'lqi: {8:#04x}, '           \
-                'rssi: {9:#04x}, '           \
+                'rssi: {9}, '           \
                 'ackByte: {10:#04x}, '           \
-                'battery: {11:#010x}, '           \
-                'temperature: {12:#010x}, '           \
+                'battery: {11:#06x}, '           \
+                'temperature: {12:#06x}, '           \
                 'cs: {13:#04x} '           \
                 .format(self.messageType, self.nodeType, self.extAddr, self.shortAddr,  \
                         self.routerAddr, self.panId, self.workingChannel, self.parentShortAddr, \
