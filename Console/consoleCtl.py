@@ -7,13 +7,16 @@ import logging
 import binascii
 from cobs import cobs
 from PyQt4 import QtGui
-from PyQt4.Qt import Qt
+from PyQt4.Qt import Qt, pyqtSignal, QString
 from Console.consoleView import Ui_ConsoleView
 from appMessage import AppMessage
 from cpSerial import CpSerialBytes
 from Console.consoleLogger import ConsoleLogger
+from Devices.deviceTable import DeviceTable
 
 class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
+
+    ble_ascii_received = pyqtSignal(bytearray)
 
     def __init__(self, serial):
         QtGui.QMainWindow.__init__(self)
@@ -44,11 +47,13 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         return QtGui.QMainWindow.show(self, *args, **kwargs)
     
     def logRecord(self, record):
+        if self.checkPaused.isChecked():
+            if record.levelno < logging.WARNING:
+                return
+        
         if record.levelno == ConsoleLogger.SERIAL_SEND or \
            record.levelno == ConsoleLogger.SERIAL_RECEIVE:
-            if self.checkPaused.isChecked():
-                return
-            elif self.checkHideBytes.isChecked():
+            if self.checkHideBytes.isChecked():
                 return
             
         color = 'gray'
@@ -58,6 +63,7 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
             color = 'black'
         elif record.levelno == logging.ERROR:
             color = 'red'
+            
         self.textLog.append('<font color="' + color + '">' + record.message + '</font>')   
 
     def setupComboPorts(self):
@@ -87,11 +93,9 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
     
     def setupCommands(self):
         self.buttonGetMAC.clicked.connect(self.getMac)
-        self.buttonTest.clicked.connect(self.testCobs)
+        self.buttonRSSI.clicked.connect(self.openDeviceTable)
     
     def serialReceived(self, data):
-        if self.checkPaused.isChecked():
-            return
         if self.checkDecodeCobs.isChecked():
             # Collect bytes till we see a \0, then decode the COBS frame
             for b in data:
@@ -118,23 +122,21 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         cmd = bytearray([ 0x02, 0x04, 0xff ])
         self.serial.send(cmd)
 
-    def testCobs(self):
-        del self.serial_buffer[:]
-        # We recieve a bytearray from serial
-        test = bytearray([ 0x01,0x02,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0x80,0x70,0x60,0x50,0x40,0x30,0x20,0x10,0x00,0xf0,0x0e,0xa,0xf0,0x0e,0x0b,0x0c,0x0d,0x04,0x03,0x02,0x01,0x04,0x03,0x02,0x01,0xff ])
-        # cobs wants a buffer instead, plus a \0 at the end
-        cobs_test = cobs.encode(buffer(test))
-        # now back to a bytearray for serialReceived
-        data = bytearray(cobs_test)
-        data.extend([0x00])
-        self.serialReceived(data)
-        
+    def openDeviceTable(self):
+        try:
+            self.devicesTable.show()
+        except:
+            self.devicesTable = DeviceTable(self)
+            self.devicesTable.show()
+
+    
     def parseCobsRecord(self, data):
         if data[0] == 0x01:
             msg = AppMessage(data)
             self.logger.info(str(msg))
         
     def parseBleAsciiRecord(self, data):
+        self.ble_ascii_received.emit(data)
         self.logger.info(str(data))
         
         

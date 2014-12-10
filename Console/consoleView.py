@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Wed Dec 10 12:51:23 2014
+# Created: Wed Dec 10 14:05:37 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,9 +54,9 @@ class Ui_ConsoleView(object):
         self.buttonGetMAC = QtGui.QPushButton(self.groupBox_2)
         self.buttonGetMAC.setObjectName(_fromUtf8("buttonGetMAC"))
         self.horizontalLayout.addWidget(self.buttonGetMAC)
-        self.buttonTest = QtGui.QPushButton(self.groupBox_2)
-        self.buttonTest.setObjectName(_fromUtf8("buttonTest"))
-        self.horizontalLayout.addWidget(self.buttonTest)
+        self.buttonRSSI = QtGui.QPushButton(self.groupBox_2)
+        self.buttonRSSI.setObjectName(_fromUtf8("buttonRSSI"))
+        self.horizontalLayout.addWidget(self.buttonRSSI)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.horizontalLayout_4.addWidget(self.groupBox_2)
@@ -124,7 +124,7 @@ class Ui_ConsoleView(object):
         self.buttonClosePort.setText(_translate("ConsoleView", "Close", None))
         self.groupBox_2.setTitle(_translate("ConsoleView", "Commands", None))
         self.buttonGetMAC.setText(_translate("ConsoleView", "Get MAC", None))
-        self.buttonTest.setText(_translate("ConsoleView", "Test", None))
+        self.buttonRSSI.setText(_translate("ConsoleView", "RSSI", None))
         self.buttonSend.setText(_translate("ConsoleView", "Send", None))
         self.checkHex.setText(_translate("ConsoleView", "as hex", None))
         self.checkPaused.setText(_translate("ConsoleView", "Paused", None))
