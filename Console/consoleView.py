@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Console/consoleView.ui'
 #
-# Created: Wed Dec 10 14:05:37 2014
+# Created: Thu Dec 11 10:44:06 2014
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -105,6 +105,14 @@ class Ui_ConsoleView(object):
         self.horizontalLayout_3.addWidget(self.checkHideBytes)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.horizontalLayout_3.addWidget(self.label)
+        self.lineFilter = QtGui.QLineEdit(self.centralwidget)
+        self.lineFilter.setObjectName(_fromUtf8("lineFilter"))
+        self.horizontalLayout_3.addWidget(self.lineFilter)
+        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem2)
         self.buttonClear = QtGui.QPushButton(self.centralwidget)
         self.buttonClear.setObjectName(_fromUtf8("buttonClear"))
         self.horizontalLayout_3.addWidget(self.buttonClear)
@@ -131,5 +139,6 @@ class Ui_ConsoleView(object):
         self.checkBleAscii.setText(_translate("ConsoleView", "BLE ASCII", None))
         self.checkDecodeCobs.setText(_translate("ConsoleView", "Decode COBS", None))
         self.checkHideBytes.setText(_translate("ConsoleView", "Hide Bytes", None))
+        self.label.setText(_translate("ConsoleView", "Filter:", None))
         self.buttonClear.setText(_translate("ConsoleView", "Clear", None))
 

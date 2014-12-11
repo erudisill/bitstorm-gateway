@@ -136,6 +136,10 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
             self.logger.info(str(msg))
         
     def parseBleAsciiRecord(self, data):
+        f = str(self.lineFilter.text()).strip()
+        if len(f) > 0:
+            if not f in str(data):
+                return
         self.ble_ascii_received.emit(data)
         self.logger.info(str(data))
         
