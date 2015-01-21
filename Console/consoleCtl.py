@@ -13,6 +13,7 @@ from appMessage import AppMessage
 from cpSerial import CpSerialBytes
 from Console.consoleLogger import ConsoleLogger
 from Devices.deviceTable import DeviceTable
+from statusMessage import StatusMessage
 
 class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
 
@@ -102,7 +103,7 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
                 if b == 0:
                     try:
                         decoded = bytearray(cobs.decode(buffer(self.serial_buffer)))
-                        self.logger.info('[COB] ' + str(CpSerialBytes(decoded)))
+                        #self.logger.info('[COB] ' + str(CpSerialBytes(decoded)))
                         self.parseCobsRecord(decoded)
                     except Exception, e:
                         self.logger.error(str(e))
@@ -131,7 +132,10 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
 
     
     def parseCobsRecord(self, data):
-        if data[0] == 0x01:
+        if data[0] == 0xAB and data[1] == 0xAB:
+            msg = StatusMessage(data)
+            self.logger.info(str(msg))
+        elif data[0] == 0x01:
             msg = AppMessage(data)
             self.logger.info(str(msg))
         
