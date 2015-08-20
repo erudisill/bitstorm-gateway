@@ -75,6 +75,7 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         self.textLog.append('<font color="' + color + '">' + record.message + '</font>') 
         if self.file:  
 	        self.file.write(record.message + "\n");
+	        self.file.flush()
 
     def setupComboPorts(self):
         ports = self.serial.getPorts()
