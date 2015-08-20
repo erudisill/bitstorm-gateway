@@ -5,6 +5,7 @@ Created on Dec 2, 2014
 '''
 import logging
 import binascii
+import time
 from cobs import cobs
 from PyQt4 import QtGui
 from PyQt4.Qt import Qt, pyqtSignal, QString
@@ -41,6 +42,8 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         
         # Setup unique application commands/buttons
         self.setupCommands()
+        
+        self.file = None
                
 
     def show(self, *args, **kwargs):
@@ -69,7 +72,9 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
         elif record.levelno == logging.ERROR:
             color = 'red'
             
-        self.textLog.append('<font color="' + color + '">' + record.message + '</font>')   
+        self.textLog.append('<font color="' + color + '">' + record.message + '</font>') 
+        if self.file:  
+	        self.file.write(record.message + "\n");
 
     def setupComboPorts(self):
         ports = self.serial.getPorts()
@@ -77,10 +82,13 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
             self.comboPorts.addItem(port[0])
                 
     def openPort(self):
+        self.filename = time.strftime("%Y%m%d-%H%M%S") + ".log"
+        self.file = open(self.filename, 'w')
         self.serial.openPort(self.comboPorts.currentText())
         
     def closePort(self):
         self.serial.closePort()
+        self.file = open(self.filename, 'w')
        
     def sendData(self):
         if self.checkHex.isChecked():
