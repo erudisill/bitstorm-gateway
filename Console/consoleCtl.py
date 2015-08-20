@@ -57,6 +57,10 @@ class ConsoleCtl(QtGui.QMainWindow, Ui_ConsoleView):
             if self.checkHideBytes.isChecked():
                 return
             
+        # Apply filter
+        if str(self.lineFilter.text()) not in record.message:
+        	return;
+        
         color = 'gray'
         if record.levelno == ConsoleLogger.SERIAL_SEND:
             color = 'black'
